@@ -2,5 +2,6 @@
 _myTorchEnv/
 myTorch.egg-info/
 **/__pycache__/
-Training_Examples/
+Training_Examples/**/fold_*/
+Training_Examples/**/runs/
 DATA/
