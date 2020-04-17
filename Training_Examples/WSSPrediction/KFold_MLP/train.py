@@ -15,13 +15,13 @@ if __name__ == "__main__":
        numpy_files, transform=transform, **config.TVS.init)
 
     KFoldTVSLoader.split(*config.TVS.split.args, **config.TVS.split.kwargs)
-       
+
     split = KFoldTVSLoader(**config.TVS.call)
 
     time_log = []
 
     for fold_number, (train_loader, valid_loader, test_loader) in enumerate(split):
-        
+
         if fold_number == 0:
             time_log.append(
                 dict(
@@ -31,17 +31,17 @@ if __name__ == "__main__":
             )
 
         fold_number += 1
-        
+
         print(f'runing fold {fold_number}/{5}')
-        
+
         # mt.nn.ConvBase.default_padding_string = 'periodic_replication'
         model = config.ml_model(*config.model.args, **config.model.kwargs)
-        
+
         print(mt.Utils.count_parameters(model))
-        
+
         model = mt.nn.init.XavierUniformWeightInitializer()(model)
-        
-        
+
+
         optimizer = torch.optim.Adam(model.parameters(), **config.optimizer.kwargs)
         criterion = torch.nn.L1Loss(**config.criterion)
 
@@ -51,6 +51,7 @@ if __name__ == "__main__":
                 on_step=1000, properties=['curvature'],
                 filename=f'./fold_{fold_number}/train/data'),
             mt.Callbacks.LRFind(),
+            mt.Callbacks.ResampleTrainingData(on_epoch=10),
             mt.Callbacks.ReduceLROnValidPlateau(
                 checkpoint=True, to_file=f'./fold_{fold_number}/valid/log',
                 filename=f'./fold_{fold_number}/Checkpoints/checkpoint')
@@ -61,15 +62,15 @@ if __name__ == "__main__":
                 on_batch=1, properties=['curvature'],
                 filename=f'./fold_{fold_number}/test/data')
         ]
-        
+
         trainer = mt.Trainer(model, optimizer, criterion, **config.trainer)
-        
+
         start_time = time()
 
         trainer.fit_on_loader(
             train_loader, valid_dataloader=valid_loader, cycles=[100, ],
             callbacks=fit_callbacks, std_to_file=f'./fold_{fold_number}/train/log')
-        
+
         end_time = time()
 
         train_time = end_time - start_time
@@ -81,7 +82,7 @@ if __name__ == "__main__":
             test_loader, std_to_file=f'./fold_{fold_number}/test/log', callbacks=test_callbacks
         )
         end_time = time()
-        
+
         test_time = end_time-start_time
 
         time_log.append(

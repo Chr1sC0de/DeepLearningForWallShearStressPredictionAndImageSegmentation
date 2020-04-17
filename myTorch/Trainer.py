@@ -322,6 +322,8 @@ class CFDConstant(Trainer):
 
     def get_accuracy(self):
         with _torch.no_grad():
+            # here we use the relative error, where when values are close to zero
+            # we apply a small eps so that the solution does not blow up to infinity
             t = self.y_true
             p = self.y_pred
             numerator = 2.0 * _torch.abs(p - t)

@@ -33,13 +33,12 @@ class ResampleTrainingData(CallOn):
                     y = y.unsqueeze(0)
                 y_pred = env.model(x)
                 error = torch.clamp(
-                    torch.abs(y-y_pred)/(torch.abs(y)+1e-5),
+                    2*torch.abs(y-y_pred)/(torch.abs(y+y_pred)+1e-5),
                     0,
                     1
                 )
                 accuracy = (100-error*100).mean().detach().to('cpu').numpy()
                 sol_list.append( (dataset.file_paths[i], accuracy) )
-                pass
 
         sol_list.sort(key=lambda x: x[1])
         accuracies = [item[1] for item in sol_list]
@@ -60,5 +59,4 @@ class ResampleTrainingData(CallOn):
         ]
 
         env.train_dataloader.dataset.file_paths += lowest_scorering_files
-
 

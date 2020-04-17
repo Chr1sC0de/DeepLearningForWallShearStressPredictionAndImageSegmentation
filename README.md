@@ -22,7 +22,7 @@ python -m pip install .
 Running Examples
 ----------------
 
-Examples are stored in training examples. At the moment only the examples for predicting WSS are supplied. Internal field predictions will be added at a later date. To run an example, in the terminal,
+Examples are stored in training examples. At the moment only the examples for predicting WSS are supplied. Internal field predictions will be added at a later date (accuracy may vary from machine to machine). To run an example, in the terminal,
 
 ````
 cd Training_Examples/WSSPrediction/case_folder

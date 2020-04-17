@@ -8,9 +8,9 @@ target_name = 'wss'
 class Model(torch.nn.Module):
     def __init__(self, *args, **kwargs):
         super().__init__()
-        
+
         base = 600
-        
+
         self.lin1 = torch.nn.Linear(4, base, bias=False)
         self.lin2 = torch.nn.Linear(base, base * 2, bias=False)
         self.lin3 = torch.nn.Linear(base * 2, base * 4, bias=False)
@@ -18,7 +18,7 @@ class Model(torch.nn.Module):
         self.lin5 = torch.nn.Linear(base * 2, base * 1, bias=False)
         self.lin6 = torch.nn.Linear(base * 1, base // 2, bias=False)
         self.lin7 = torch.nn.Linear(base // 2, 1, bias=False)
-        
+
     def forward(self, x, *args, **kwargs):
         x = x.transpose(1,-1)
         x = self.lin1(x)

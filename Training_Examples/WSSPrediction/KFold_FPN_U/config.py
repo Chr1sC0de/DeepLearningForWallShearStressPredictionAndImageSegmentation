@@ -12,7 +12,7 @@ data_folder = current_directory/'../../../Data/NewtonianSteadyWSS'
 TVS = mt.Utils.AttrDict()
 TVS.init = dict(input_name=input_name, target_name=target_name)
 TVS.split = mt.Utils.AttrDict()
-TVS.split.args = (0.1, )
+TVS.split.args = (0.1,)
 TVS.split.kwargs = dict(random_state=1, n_splits=5)
 TVS.call = dict(batch_size=1, shuffle=True)
 

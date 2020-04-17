@@ -1,7 +1,7 @@
 from pathlib import Path
 import myTorch as mt
 
-input_name = 'points'
+input_name = 'curvature'
 target_name = 'wss'
 
 

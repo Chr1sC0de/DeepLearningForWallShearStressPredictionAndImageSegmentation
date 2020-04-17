@@ -46,6 +46,7 @@ if __name__ == "__main__":
                 on_step=1000, properties=['curvature'],
                 filename=f'./fold_{fold_number}/train/data'),
             mt.Callbacks.LRFind(),
+            mt.Callbacks.ResampleTrainingData(on_epoch=10),
             mt.Callbacks.ReduceLROnValidPlateau(
                 checkpoint=True, to_file=f'./fold_{fold_number}/valid/log',
                 filename=f'./fold_{fold_number}/Checkpoints/checkpoint'
