@@ -1,0 +1,6 @@
+.vscode/
+_myTorchEnv/
+myTorch.egg-info/
+**/__pycache__/
+Training_Examples/
+DATA/
