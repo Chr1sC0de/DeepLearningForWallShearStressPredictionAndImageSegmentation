@@ -140,10 +140,10 @@ class Trainer:
                 # self.pre_epoch
                 [callback.pre_epoch(self) for callback in self.callback_list]
                 try:
-                    self.n_batches = len(train_dataloader)
+                    self.n_batches = len(self.train_dataloader)
                 except ValueError:
                     pass
-                for self.i_batch, self.batch in enumerate(train_dataloader):
+                for self.i_batch, self.batch in enumerate(self.train_dataloader):
                     # self.pre_batch
                     [callback.pre_batch(self) for
                         callback in self.callback_list]
@@ -155,6 +155,7 @@ class Trainer:
                         break
                 # self.post_epoch
                 [callback.post_epoch(self) for callback in self.callback_list]
+                self.main_dataloader = self.train_dataloader
                 if self.break_epoch_loop:
                     break
             # self.post_cycle
@@ -276,8 +277,10 @@ class Trainer:
         with _torch.no_grad():
             t = self.y_true
             p = self.y_pred
+            numerator = 2 * _torch.abs(t-p)
+            denominator = _torch.abs(t+p)
             error = _torch.clamp(
-                _torch.abs(t-p)/(_torch.abs(t)+1e-5),
+                numerator/denominator + 1e-7,
                 0,
                 1
             )
