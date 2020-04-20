@@ -5,7 +5,6 @@ import numpy as np
 from time import time
 
 
-
 if __name__ == "__main__":
     numpy_files = mt.Utils.glob_npz(config.data_folder)
 
@@ -34,7 +33,7 @@ if __name__ == "__main__":
 
         print(f'runing fold {fold_number}/{5}')
 
-        mt.nn.ConvBase.default_padding_string = 'periodic_replication'
+
         model = config.ml_model(*config.model.args, **config.model.kwargs)
         model = mt.nn.init.XavierUniformWeightInitializer()(model)
         optimizer = torch.optim.Adam(model.parameters(), **config.optimizer.kwargs)
@@ -46,7 +45,7 @@ if __name__ == "__main__":
                 on_step=1000, properties=['curvature'],
                 filename=f'./fold_{fold_number}/train/data'),
             mt.Callbacks.LRFind(),
-            mt.Callbacks.ResampleTrainingData(on_epoch=10),
+
             mt.Callbacks.ReduceLROnValidPlateau(
                 checkpoint=True, to_file=f'./fold_{fold_number}/valid/log',
                 filename=f'./fold_{fold_number}/Checkpoints/checkpoint')

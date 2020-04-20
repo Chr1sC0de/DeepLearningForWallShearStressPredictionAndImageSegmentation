@@ -5,8 +5,13 @@ Installation
 
 To install the requirements
 
+First install pytorch
 ````
-python -m pip install requirements.txt
+pip install torch===1.4.0 torchvision===0.5.0 -f https://download.pytorch.org/whl/torch_stable.html
+````
+
+````
+python -m pip install -r requirements.txt
 ````
 
 To install the main package in debug mode

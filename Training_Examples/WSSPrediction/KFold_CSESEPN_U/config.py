@@ -4,7 +4,7 @@ import myTorch as mt
 input_name = 'curvature'
 target_name = 'wss'
 
-ml_model =  mt.Models.CSESEVGGFPNN
+ml_model =  mt.Models.CSESEVGGFPN
 
 current_directory = Path(__file__).parent
 

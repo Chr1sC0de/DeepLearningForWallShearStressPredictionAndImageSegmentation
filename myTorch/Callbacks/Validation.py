@@ -163,7 +163,7 @@ class Validation(CallOn):
 
 class ReduceLROnValidPlateau(Validation):
 
-    def __init__(self, *args, reduce_on=4, reduce_factor=0.5, **kwargs):
+    def __init__(self, *args, reduce_on=4, reduce_factor=0.1, **kwargs):
         super(ReduceLROnValidPlateau, self).__init__(
              *args, **kwargs
         )
