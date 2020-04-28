@@ -38,6 +38,7 @@ if __name__ == "__main__":
         train_true.dataset.file_paths += valid_true.dataset.file_paths
         for _ in range(((n_synthetic)//2)//n_true):
             train_synthetic.dataset.file_paths += train_true.dataset.file_paths
+
         # now set which dataloaders will be the train, test and valid
         train_loader = train_synthetic
         test_loader = test_true
@@ -68,7 +69,6 @@ if __name__ == "__main__":
                 on_step=1000, properties=['curvature'],
                 filename=f'./fold_{fold_number}/train/data'),
             mt.Callbacks.LRFind(),
-
             mt.Callbacks.ReduceLROnValidPlateau(
                 checkpoint=True, to_file=f'./fold_{fold_number}/valid/log',
                 filename=f'./fold_{fold_number}/Checkpoints/checkpoint')

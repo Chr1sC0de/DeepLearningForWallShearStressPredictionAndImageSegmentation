@@ -36,5 +36,6 @@ if __name__ == "__main__":
         mean_acc = np.mean(all_accuracy)
         std_acc = np.std(all_accuracy)
 
-        print(mean_acc, std_acc)
-
+        print(mean_acc)
+        print(std_acc)
+        pass

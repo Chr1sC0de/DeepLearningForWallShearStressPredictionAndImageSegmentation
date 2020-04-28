@@ -4,4 +4,7 @@ myTorch.egg-info/
 **/__pycache__/
 Training_Examples/**/fold_*/
 Training_Examples/**/runs/
+Training_Examples/**/test
+**/*.csv
+**/*.npy
 DATA/

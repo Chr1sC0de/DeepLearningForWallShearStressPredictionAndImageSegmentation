@@ -4,12 +4,12 @@ import myTorch as mt
 input_name = 'curvature'
 target_name = 'wss'
 
-ml_model = mt.Models.VGGFPN
+ml_model = mt.Models.CSESEVGGFPN
 
 current_directory = Path(__file__).parent
 
-data_folder = current_directory/'../../../../Data/NewtonianSteadyWSS'
-true_data = current_directory/'../../../../Data/LADPatientWSS'
+data_folder = current_directory/'../../../../DATA/LADSSMNewtonianSteadyWSS'
+true_data = current_directory/'../../../../DATA/LADPatientNewtonianSteadyWSS'
 
 TVS = mt.Utils.AttrDict()
 TVS.init = dict(input_name=input_name, target_name=target_name)

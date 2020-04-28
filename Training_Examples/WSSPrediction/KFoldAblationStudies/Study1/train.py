@@ -6,6 +6,7 @@ from time import time
 
 
 if __name__ == "__main__":
+
     numpy_files_data = mt.Utils.glob_npz(config.data_folder)
     numpy_files_true = mt.Utils.glob_npz(config.true_data)
 
@@ -69,7 +70,7 @@ if __name__ == "__main__":
                 on_step=1000, properties=['curvature'],
                 filename=f'./fold_{fold_number}/train/data'),
             mt.Callbacks.LRFind(),
-
+            mt.Callbacks.ResampleTrainingData(),
             mt.Callbacks.ReduceLROnValidPlateau(
                 checkpoint=True, to_file=f'./fold_{fold_number}/valid/log',
                 filename=f'./fold_{fold_number}/Checkpoints/checkpoint')
