@@ -1,11 +1,12 @@
 import numpy as np
 import pathlib as pt
-from scipy.stats import pearsonr
+from scipy.stats import pearsonr, linregress, normaltest, boxcox
 from sklearn.metrics import precision_recall_fscore_support, classification_report, r2_score
 from collections import defaultdict
 from functools import wraps
 import pandas as pd
 import click
+from numpy.random import default_rng
 
 class limit_decorator:
     def __init__(self, limit):
@@ -19,14 +20,16 @@ class limit_decorator:
 def relative_error(y_true, y_pred):
     numerator = 2 * np.abs(y_true-y_pred)
     denominator = np.abs(y_true+y_pred) + 1e-7
-    return numerator/denominator
+    return np.clip(numerator/denominator, 0, 1)
 
 def relative_percentage_accuracy(y_true, y_pred):
     error = relative_error(y_true, y_pred)
     return np.mean((1-error))
 
 def get_coefficient_of_determination(y_true, y_pred):
-    return r2_score(y_true, y_pred)
+    slope, intercept, r_value, p_value, std_err = \
+            linregress(y_true, y_pred)
+    return r_value**2
 
 def get_coverage(y_true, *args ,limits=1):
     true_mask = np.zeros_like(y_true)
@@ -77,7 +80,7 @@ def main(path, s):
     save_file = study_folder/f'{s}.csv'
     data_dict = defaultdict(list)
 
-    folds = study_folder.glob('fold*')
+    folds = list(study_folder.glob('fold*'))
 
     name_method_dict = {
         'relative_percentage_accuracy': relative_percentage_accuracy,

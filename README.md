@@ -28,7 +28,9 @@ to view the vtk files download and install paraview https://www.paraview.org/.
 
 Data
 ----
-Data fpr training and testing is assumed to be contained in the `DATA` folder. The data is stored in two formats, .npz and .vtk. the vtk files can be easily viewed in paraview and show the meshes parameterized in in 2D, while the npz files contain the tensor data with dimensions (channels, height, width). The data files are quite large and are unable to fit on the github, however they can be requested directly from the author at cmamon@student.unimelb.edu.au.
+Data for training and testing is assumed to be contained in the `DATA` folder in the top directory. The data is stored in two formats, .npz and .vtk. the vtk files can be easily viewed in paraview and show the original meshes as wells as the meshes parameterized in 2D. The npz files contain the tensor data with dimensions (channels, height, width). The data files are quite large and are unable to fit on the free version of github, however they can be obtained directly from the following link,
+
+https://unimelbcloud-my.sharepoint.com/:f:/g/personal/cmamon_student_unimelb_edu_au/Epx-e_s_Zj1HtlF88MOmXF4B1MJMpbBEbQ7Zu1gVJizOLA?e=VYqjIn.
 
 Running Examples
 ----------------
