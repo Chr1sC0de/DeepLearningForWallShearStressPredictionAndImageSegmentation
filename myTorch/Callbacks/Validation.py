@@ -11,11 +11,12 @@ from pathlib import Path
 def _accuracy_metric(true, pred):
     # relative accuracy
     numerator = 2 * np.abs(true-pred)
-    denominator = np.abs(true + pred + 1e-7)
-    return (100 - np.clip( numerator/denominator * 100, 1e-7, 100)).mean()
+    denominator = np.abs(true) + np.abs(pred)
+    return (100 - 100*numerator/denominator).mean()
 
 
 class _ValidationCheckpoint(Checkpoints):
+
     def __init__(self, validation_obj, *args, **kwargs):
         super(_ValidationCheckpoint, self).__init__(
             *args, **kwargs
@@ -31,9 +32,7 @@ class _ValidationCheckpoint(Checkpoints):
                 validation_score=self.validation_obj.metric_log['accuracy'][-1]
             )
 
-
 class Validation(CallOn):
-
 
     def __init__(
             self, on_batch=False, on_epoch=True, on_cycle=False,

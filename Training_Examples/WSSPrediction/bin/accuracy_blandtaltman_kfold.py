@@ -21,8 +21,8 @@ def default_list_dict():
 
 def relative_error(y_true, y_pred):
     numerator = 2 * np.abs(y_true-y_pred)
-    denominator = np.abs(y_true+y_pred) + 1e-7
-    return np.clip(numerator/denominator, 0, 1)
+    denominator = np.abs(y_true)+np.abs(y_pred) + 1e-7
+    return numerator/denominator
 
 def relative_percentage_accuracy(y_true, y_pred):
     error = relative_error(y_true, y_pred)

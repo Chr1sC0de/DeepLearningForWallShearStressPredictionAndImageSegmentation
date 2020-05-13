@@ -4,9 +4,8 @@ import config
 import numpy as np
 from time import time
 
-
-
 if __name__ == "__main__":
+
     numpy_files = mt.Utils.glob_npz(config.data_folder)
 
     transform = [mt.Data.Transforms.RollTensor(), ]

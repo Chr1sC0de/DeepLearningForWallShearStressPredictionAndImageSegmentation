@@ -27,11 +27,9 @@ class _UpsampleConv3dBase(_nn.ConvNormAct3d):
         _torch.nn.Upsample, scale_factor=2, align_corners=True,
         mode='trilinear')
 
-    def __init__(self, *args, scale_factor=2, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(_UpsampleConv3dBase, self).__init__(*args, **kwargs)
-        self.upsampling_layer = self.upsample_constructor(
-            scale_factor=scale_factor
-        )
+        self.upsampling_layer = self.upsample_constructor()
         self.out_channels = self.convolution_layer.out_channels
 
     def main_forward(self, x):

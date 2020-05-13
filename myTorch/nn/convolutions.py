@@ -86,7 +86,7 @@ class ConvBase(_Layer):
 class Conv3dBase(_Layer):
     use_special_padding = False
     __slots__ = ['kernel_size', 'stride', 'dilation']
-    padding_mode = 'replication'
+    padding_mode = 'replicate'
 
     def __init__(self, *args, **kwargs):
         super(Conv3dBase, self).__init__(*args, **kwargs)

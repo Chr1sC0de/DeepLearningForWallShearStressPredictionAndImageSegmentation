@@ -1,6 +1,6 @@
 import numpy as np
 import pathlib as pt
-from scipy.stats import pearsonr, linregress, normaltest, boxcox
+from scipy.stats import pearsonr, normaltest, boxcox
 from sklearn.metrics import precision_recall_fscore_support, classification_report, r2_score
 from collections import defaultdict
 from functools import wraps
@@ -27,9 +27,14 @@ def relative_percentage_accuracy(y_true, y_pred):
     return np.mean((1-error))
 
 def get_coefficient_of_determination(y_true, y_pred):
-    slope, intercept, r_value, p_value, std_err = \
-            linregress(y_true, y_pred)
-    return r_value**2
+    return r2_score(y_true, y_pred)
+
+def root_mean_square_error(y_true, y_pred):
+    return np.sqrt(
+        np.sum(
+            np.square(y_true - y_pred)
+        )
+    )/sum(y_true.shape)
 
 def get_coverage(y_true, *args ,limits=1):
     true_mask = np.zeros_like(y_true)
@@ -85,6 +90,7 @@ def main(path, s):
     name_method_dict = {
         'relative_percentage_accuracy': relative_percentage_accuracy,
         'coefficient_of_determination': get_coefficient_of_determination,
+        'root_mean_square_error': root_mean_square_error,
         'coverage_1p00': get_coverage_1p00,
         'coverage_0p75': get_coverage_0p75,
         'coverage_0p50': get_coverage_0p50

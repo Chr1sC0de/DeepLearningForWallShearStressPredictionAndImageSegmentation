@@ -119,3 +119,47 @@ class SavePyvistaPoints(SaveIntermediate):
         save_path = self.directory/file_name
         np.savez(save_path, **grid)
 
+
+class SaveInternalField(SavePyvistaPoints):
+
+    def construct_to_save(self, env):
+
+        batch_points = env.batch[self.points_key].detach().to('cpu').numpy()
+
+        all_meshes = []
+        all_grids = []
+
+        for i, points in enumerate(batch_points):
+
+            mesh = pv.PolyData(
+                points.reshape(3,-1).T)
+            grid = {
+                'points': points
+            }
+
+            for prop in self.properties:
+                data_prop = env.batch[prop][i].detach().to('cpu').numpy()
+                self.assign_prop_to_mesh(mesh, prop, data_prop)
+                grid[prop] = data_prop
+
+            for prop, name in zip([env.y_true, env.y_pred], ['y_true', 'y_pred']):
+                prop = prop.detach().to('cpu').numpy()[i]
+                self.assign_prop_to_mesh(mesh, name, prop)
+                grid[name] = prop
+
+            all_meshes.append(mesh)
+            all_grids.append(grid)
+
+        self.meshes_to_save = all_meshes
+        self.grids_to_save = all_grids
+        
+        
+        
+    def assign_prop_to_mesh(self, mesh, name, tensor):
+        for j, val in enumerate(tensor):
+            if len(tensor) > 1:
+                mesh.point_arrays['%s_%d' % (name, j)] = \
+                    val.squeeze().reshape(-1)
+            else:
+                mesh.point_arrays['%s' % (name)] = \
+                    val.squeeze().reshape(-1)

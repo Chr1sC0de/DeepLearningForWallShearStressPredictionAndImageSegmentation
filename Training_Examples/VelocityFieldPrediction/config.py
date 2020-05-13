@@ -1,5 +1,6 @@
 from pathlib import Path
 import myTorch as mt
+import torch
 
 input_name = 'mesh'
 target_name = 'U'
@@ -21,7 +22,7 @@ TVS.call = dict(batch_size=1, shuffle=True)
 
 model = mt.Utils.AttrDict()
 model.args = (3, 3, 3)
-model.kwargs = dict(base_channels=48, output_activation=None)
+model.kwargs = dict(base_channels=48, output_activation=torch.nn.functional.relu)
 
 optimizer = mt.Utils.AttrDict()
 optimizer.kwargs = dict(lr=1e-6, eps=1e-7)

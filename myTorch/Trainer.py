@@ -278,60 +278,21 @@ class Trainer:
             t = self.y_true
             p = self.y_pred
             numerator = 2 * _torch.abs(t-p)
-            denominator = _torch.abs(t+p)
-            error = _torch.clamp(
-                numerator/denominator + 1e-7,
-                0,
-                1
-            )
+            denominator = _torch.abs(t) + _torch.abs(p)
+            error = numerator/denominator
         return (100-error*100).mean()
 
-class CFDConstant(Trainer):
-
-    def lr_find(
-            self, train_loader, plot=False, use_recommended=True, **kwargs):
-        if not hasattr(self, 'lr_finder'):
-            self.lr_finder = LRFinderCFD(
-                self.model, self.optimizer, self.criterion,
-            )
-        self.lr_finder.range_test(train_loader, **kwargs)
-        if plot:
-            self.lr_finder.plot()
-        if use_recommended:
-            min_lr, max_lr = self.lr_finder.recommend_lr()
-            self.optimizer.param_groups[0]['lr'] = min_lr
-
-    def test_step(self, data_dict):
-        self.run_extractor_hooks(data_dict)
-        self.x, self.y_true = self.data_extractor(data_dict)
-        self.x = self.x.to(self.device)
-        self.y_true = self.y_true.to(self.device)
-        self.y_pred = self.model(self.x)
-        #our criterion now requires a domain
-        self.loss = self.criterion(self.y_pred, self.y_true, self.x)
-        # self.loss = self.criterion(self.y_pred, self.y_true)
-        self.accuracy = self.get_accuracy()
-
-    def train_step(self, data_dict):
-        self.run_extractor_hooks(data_dict)
-        self.x, self.y_true = self.data_extractor(data_dict)
-        self.optimizer.zero_grad()
-        self.y_pred = self.model(self.x)
-        self.loss = self.criterion(self.y_pred, self.y_true, self.x)
-        # self.loss = self.criterion(self.y_pred, self.y_true)
-        self.loss.backward()
-        self.optimizer.step()
-        self.accuracy = self.get_accuracy()
+class InternalFieldTrainer(Trainer):
 
     def get_accuracy(self):
         with _torch.no_grad():
-            # here we use the relative error, where when values are close to zero
-            # we apply a small eps so that the solution does not blow up to infinity
             t = self.y_true
             p = self.y_pred
-            numerator = 2.0 * _torch.abs(p - t)
-            denominator = p + t + 1e-7
-            error = _torch.clamp(numerator/denominator, 0, 1)
+
+            numerator = 2 * _torch.abs(t-p)
+            denominator = _torch.abs(t) + _torch.abs(p) + 1e-7
+            error = numerator/denominator
+
             return (100-error*100).mean()
 
 

@@ -33,7 +33,6 @@ if __name__ == "__main__":
 
         print(f'runing fold {fold_number}/{5}')
 
-
         model = config.ml_model(*config.model.args, **config.model.kwargs)
         model = mt.nn.init.XavierUniformWeightInitializer()(model)
         optimizer = torch.optim.Adam(model.parameters(), **config.optimizer.kwargs)

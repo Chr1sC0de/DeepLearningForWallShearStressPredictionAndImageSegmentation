@@ -1,5 +1,6 @@
 from pathlib import Path
 import myTorch as mt
+import torch
 
 input_name = 'curvature'
 target_name = 'wss'
@@ -18,7 +19,7 @@ TVS.call = dict(batch_size=1, shuffle=True)
 
 model = mt.Utils.AttrDict()
 model.args = (4, 1, 3)
-model.kwargs = dict(base_channels=32, layers=[2, 2, 3, 5, 2],output_activation=None)
+model.kwargs = dict(base_channels=32, layers=[2, 2, 3, 5, 2],output_activation=torch.nn.functional.relu)
 
 optimizer = mt.Utils.AttrDict()
 optimizer.kwargs = dict(lr=1e-7, eps=1e-7)

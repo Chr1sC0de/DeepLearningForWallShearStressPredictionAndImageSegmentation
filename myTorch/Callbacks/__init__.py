@@ -5,7 +5,7 @@ from .Validation import Validation, ReduceLROnValidPlateau
 from .Checkpoints import Checkpoints
 from .LRFind import LRFind
 from .DataAnalysis import DataAnalysis
-from .SaveIntermediate import SaveIntermediate, SavePyvistaPoints
+from .SaveIntermediate import SaveIntermediate, SavePyvistaPoints, SaveInternalField
 from .Resample import ResampleTrainingData
 
 __all__ = [

@@ -1,5 +1,6 @@
 from pathlib import Path
 import myTorch as mt
+import torch
 import segmentation_models_pytorch as smp
 from torch import nn
 
@@ -28,7 +29,7 @@ TVS.call = dict(batch_size=8, shuffle=True)
 
 model = mt.Utils.AttrDict()
 model.args = (4, 1, 3)
-model.kwargs = dict(base_channels=64, output_activation=None)
+model.kwargs = dict(base_channels=64, output_activation=torch.nn.functional.relu)
 
 optimizer = mt.Utils.AttrDict()
 optimizer.kwargs = dict(lr=1e-7, eps=1e-7)
