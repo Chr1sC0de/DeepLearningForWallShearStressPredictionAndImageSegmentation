@@ -11,8 +11,8 @@ from pathlib import Path
 def _accuracy_metric(true, pred):
     # relative accuracy
     numerator = 2 * np.abs(true-pred)
-    denominator = np.abs(true) + np.abs(pred)
-    return (100 - 100*numerator/denominator).mean()
+    denominator = np.abs(true) + np.abs(pred) + 1e-7
+    return (100 - 100*np.clip(numerator/denominator, 0, 1)).mean()
 
 
 class _ValidationCheckpoint(Checkpoints):
