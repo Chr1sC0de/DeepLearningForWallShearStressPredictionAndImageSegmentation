@@ -75,9 +75,9 @@ class LRFinder(object):
         self.iterator = iter(self.train_loader)
 
         for iteration in tqdm(range(num_iter), disable=disable_tqdm):
-            x, y_true = self._next_iter()
+            nextVals = [val.float() for val in self._next_iter()]
+            loss = self._train_batch(*nextVals)
 
-            loss = self._train_batch(x.float(), y_true.float())
             if val_loader:
                 loss = self._validate(val_loader)
             lr_schedule.step()

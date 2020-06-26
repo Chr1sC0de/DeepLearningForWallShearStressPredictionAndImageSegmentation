@@ -216,7 +216,7 @@ class Trainer:
     def test_step(self, data_dict):
         self.run_extractor_hooks(data_dict)
         self.x, self.y_true = self.data_extractor(data_dict)
-        self.x = self.x.to(self.device)
+        # self.x = self.x.to(self.device)
         self.y_true = self.y_true.to(self.device)
         self.y_pred = self.model(self.x)
         self.loss = self.criterion(self.y_pred, self.y_true)
@@ -282,6 +282,7 @@ class Trainer:
             error = numerator/denominator
         return (100-error*100).mean()
 
+
 class InternalFieldTrainer(Trainer):
 
     def get_accuracy(self):
@@ -294,7 +295,6 @@ class InternalFieldTrainer(Trainer):
             error = numerator/denominator
 
             return (100-error*100).mean()
-
 
 
 class GraphTrainer(Trainer):

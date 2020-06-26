@@ -113,7 +113,10 @@ class ToDevice:
     def __call__(self, *args):
         output_args = []
         for arg in args:
-            output_args.append(arg.to(self.device))
+            if isinstance(arg, (list, tuple)):
+                output_args.append([item.to(self.device) for item in arg])
+            else:
+                output_args.append(arg.to(self.device))
         return output_args
 
 
