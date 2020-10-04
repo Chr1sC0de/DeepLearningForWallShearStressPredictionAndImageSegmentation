@@ -10,6 +10,7 @@ ml_model = mt.Models.Unet
 current_directory = Path(__file__).parent
 
 data_folder = current_directory/'../../../Data/LADSSMNewtonianSteadyWSS'
+
 TVS = mt.Utils.AttrDict()
 TVS.init = dict(input_name=input_name, target_name=target_name)
 TVS.split = mt.Utils.AttrDict()

@@ -1,11 +1,29 @@
 # myTorch
 
-Current research involves the automatic delineation of the artery lumen as well as the analysis of artery wall shear stress using deep learning. The work is currently unpublished and is within the drafting stages.
+Deep Convolutional Neural Networks for Real-Time Patient-Specific Wall Shear Stress
+Estimation
 
-Deep Convolutional Neural Networks for Real-Time Patient-Specific Wall Shear Stress Estimation 
+Current research involves the automatic delineation of the artery lumen as well as
+the analysis of artery wall shear stress using deep learning. The work is currently
+unpublished and is within the drafting stages.
 
-Automatic Coronary Artery Lumen Border Detection Using Deep Convolutional Neural Networks
+Abstract—Blood flow exerts stresses on the coronary artery wall.Wall shear stress
+(WSS), the parallel component of stress, when abnormally low ( <1Pa) may promote the
+pathological development of cholesterol-laden plaque, resulting in arterial
+narrowing. Accurately determining WSS helps to inform clinicians about plaque
+progression. Nevertheless, WSS is difficult to measure directly but can be estimated
+accurately by solving the governing equations of fluid motion (the Navier-Stokes
+Equations). Solving these complex equations can be both time consuming and
+computationally expensive to perform (> 1hr). Deep Learning (DL) is capable of
+learning patterns directly from data providing an avenue for real-time prediction of
+WSS. Thus, in this paper, we outline a method which employs popular DL models for
+their use in the prediction of WSS from artery models generated from coronary
+angiography. The best performing model was able to predict the WSS in under 0.29s
+with an average coefficient of determination R2> 75% compared to high resolution CFD
+simulations.
 
+![alt](./Images/pipeline.PNG)
+![alt](./Images/predictions.PNG)
 
 Installation
 ------------
