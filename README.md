@@ -4,6 +4,8 @@ Code for unpublished work,
 Deep Convolutional Neural Networks for Real-Time Patient-Specific Wall Shear Stress Estimation 
 Automatic Coronary Artery Lumen Border Detection Using Deep Convolutional Neural Networks
 
+Current research involves the automatic delineation of the artery lumen as well as the analysis of artery wall shear stress using deep learning
+
 Installation
 ------------
 
