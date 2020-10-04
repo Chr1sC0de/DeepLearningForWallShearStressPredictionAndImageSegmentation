@@ -51,8 +51,3 @@ Examples are stored in the `Training_Examples` directory. At the moment only the
 cd Training_Examples/WSSPrediction/<case_folder>
 python train.py
 ````
-
-A note on output meshes
------------------------
-
-The meshes output from the the training procedures are all from the pyvista `StructuredGrid` methods, the method produces a poor quality mesh and will be updated in future.
