@@ -5,7 +5,8 @@ Estimation
 
 Current research involves the automatic delineation of the artery lumen as well as
 the analysis of artery wall shear stress using deep learning. The work is currently
-unpublished and is within the drafting stages.
+unpublished and is within the drafting stages. Bellow includes the paper abstract
+as well as several figures. Can be found in the drafts folder.
 
 Abstract—Blood flow exerts stresses on the coronary artery wall.Wall shear stress
 (WSS), the parallel component of stress, when abnormally low ( <1Pa) may promote the
