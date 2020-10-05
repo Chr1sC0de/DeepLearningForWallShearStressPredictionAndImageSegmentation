@@ -1,4 +1,4 @@
-# myTorch
+# Convolutional Neural Networks for Wall Shear Stress Prediction
 
 Deep Convolutional Neural Networks for Real-Time Patient-Specific Wall Shear Stress
 Estimation, most recent draft can be found [here](https://github.com/Chr1sC0de/myTorch/tree/master/Drafts/CNN_WSS_Predictions.pdf)
