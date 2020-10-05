@@ -1,7 +1,7 @@
 # myTorch
 
 Deep Convolutional Neural Networks for Real-Time Patient-Specific Wall Shear Stress
-Estimation
+Estimation, most recent draft can be found [here](hhttps://github.com/Chr1sC0de/myTorch/Drafts/CNN_WSS_Predictions.pdf)
 
 Current research involves the automatic delineation of the artery lumen as well as
 the analysis of artery wall shear stress using deep learning. The work is currently
