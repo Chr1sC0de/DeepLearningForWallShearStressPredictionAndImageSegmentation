@@ -3,6 +3,8 @@
 Deep Convolutional Neural Networks for Real-Time Patient-Specific Wall Shear Stress
 Estimation, most recent draft can be found [here](https://github.com/Chr1sC0de/myTorch/tree/master/Drafts/CNN_WSS_Predictions.pdf)
 
+We outline a strategy for automatically extracting the main portion of the coronary artery from OCT [here](https://github.com/Chr1sC0de/Deep-Learning-For-Wall-Shear-Stress-Prediction/blob/master/Drafts/Lumen%20Detection.pdf) 
+
 Current research involves the automatic delineation of the artery lumen as well as
 the analysis of artery wall shear stress using deep learning. The work is currently
 unpublished and is within the drafting stages. Bellow includes the paper abstract
