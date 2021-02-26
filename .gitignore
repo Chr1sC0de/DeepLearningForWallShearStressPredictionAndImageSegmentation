@@ -7,4 +7,4 @@ Training_Examples/**/runs/
 Training_Examples/**/test
 **/*.csv
 **/*.npy
-DATA/
+/DATA
